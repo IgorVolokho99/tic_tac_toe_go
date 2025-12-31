@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 const (
 	Reset = "\033[0m"
@@ -36,5 +38,15 @@ func printMap(board [3][3]string) {
 				fmt.Print("\n")
 			}
 		}
+	}
+}
+
+func isMoveCorrect(board [3][3]string, move string) bool {
+	movei := byte(move[0]) - 48
+	cell := board[(movei-1)/3][(movei-1)%3]
+	if cell == "X" || cell == "O" {
+		return false
+	} else {
+		return true
 	}
 }
