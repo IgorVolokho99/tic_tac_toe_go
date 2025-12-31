@@ -70,3 +70,13 @@ func getPlayerCellNumber(board [3][3]string) string {
 		return move
 	}
 }
+
+func makeMove(board [3][3]string, cellNumber string, isZeroMow bool) [3][3]string {
+	cellNumberi := byte(cellNumber[0]) - 48
+	if isZeroMow {
+		board[(cellNumberi-1)/3][(cellNumberi-1)%3] = "O"
+	} else {
+		board[(cellNumberi-1)/3][(cellNumberi-1)%3] = "X"
+	}
+	return board
+}
