@@ -50,3 +50,23 @@ func isMoveCorrect(board [3][3]string, move string) bool {
 		return true
 	}
 }
+
+func getPlayerCellNumber(board [3][3]string) string {
+	var move string
+
+	for {
+		fmt.Scan(&move)
+
+		if len(move) != 1 || move[0] < '1' || move[0] > '9' {
+			fmt.Println("Неверный ввод. Пожалуйста, введите цифру от 1 до 9.")
+			continue
+		}
+
+		if !isMoveCorrect(board, move) {
+			fmt.Println("Неверный ввод. Пожалуйста, введите цифру пустой ячейки.")
+			continue
+		}
+
+		return move
+	}
+}
