@@ -11,13 +11,39 @@ const (
 )
 
 func main() {
-	mapField := [3][3]string{
-		{"1", "X", "3"},
-		{"4", "5", "O"},
+	board := [3][3]string{
+		{"1", "2", "3"},
+		{"4", "5", "6"},
 		{"7", "8", "9"},
 	}
-
-	printMap(mapField)
+	order_of_move := "X"
+	for i := 0; i < 9; i++ {
+		if order_of_move == "X" {
+			fmt.Println("Ходят крестики")
+		} else {
+			fmt.Println("Ходят нолики")
+		}
+		printMap(board)
+		move := getPlayerCellNumber(board)
+		board = makeMove(board, move, order_of_move == "O")
+		if hasWinner(board) {
+			printMap(board)
+			if order_of_move == "X" {
+				fmt.Println("Крестики победили!")
+			} else {
+				fmt.Println("Нолики победили!")
+			}
+			break
+		}
+		if order_of_move == "X" {
+			order_of_move = "O"
+		} else {
+			order_of_move = "X"
+		}
+	}
+	if !hasWinner(board) {
+		fmt.Println("Ничья!")
+	}
 }
 
 func printMap(board [3][3]string) {
