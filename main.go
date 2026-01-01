@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 const (
@@ -24,7 +25,12 @@ func main() {
 			fmt.Println("Ходят нолики")
 		}
 		printMap(board)
-		move := getPlayerCellNumber(board)
+		move := ""
+		if order_of_move == "X" {
+			move = getPlayerCellNumber(board)
+		} else {
+			move = strconv.Itoa(GetBestMove(board, "O"))
+		}
 		board = makeMove(board, move, order_of_move == "O")
 		if hasWinner(board) {
 			printMap(board)
@@ -108,7 +114,6 @@ func makeMove(board [3][3]string, cellNumber string, isZeroMow bool) [3][3]strin
 }
 
 func hasWinner(board [3][3]string) bool {
-
 	for i := 0; i < 3; i++ {
 		if board[i][0] == board[i][1] && board[i][1] == board[i][2] {
 			return true
